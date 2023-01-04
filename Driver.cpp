@@ -14,7 +14,7 @@ hours, case 2 is add minutes, case 3 is add seconds and case 4 is exit the appli
 #include <iostream>
 #include <iomanip>
 // to use current time, disable warning 4996
-#pragma warning(disable : 4996).
+#pragma warning(disable : 4996)
 using namespace std;
 
 // function objects
