@@ -4,6 +4,9 @@ This program was written in C++ as an assignment for a college class. The assign
 ## Classes 
 The program includes a main class as well as Clock, Driver, and TimeDef classes to keep main compact and clean and more maintainable. Clock.cpp contains definitions for time change including functions addHour, addMinute, addSecond and addampm. TimeDef.cpp contains a conditional branch that determines if leading zero output is needed. Driver.cpp loops through main menu of the program and operates on a switch statement that allows the user to add time or exit the application.
 
+## License
+All code in this repository is licensed under a [APACHE LICENSE, VERSION 2.0](LICENSE-CODE).
+
 ## The Application
 <p align="center">
     <img src="https://user-images.githubusercontent.com/110789514/211573425-96735ba2-31d2-4e6d-aa0e-e5ebb7679afe.png" />
