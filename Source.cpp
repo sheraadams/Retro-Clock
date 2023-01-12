@@ -2,7 +2,6 @@
 Shera Adams
 Southern New Hampshire University
 Chada Tech Clock
-
 ****************************************************************************************************/
 #include <iostream>
 #include "Clock.h"
@@ -16,7 +15,7 @@ using namespace std;
 
 int main() 
 {
-    system("color 03");
+    system("color 0A");
 
     Driver driverObject;
     driverObject.driver();

@@ -4,6 +4,7 @@
 using namespace std;
 
 class TimeDef {
+
 public:
     void timedef(int& seconds, int& minutes, int& TwelveDigits,
         int& Twenty4Digits, string& ampm);

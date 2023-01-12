@@ -24,6 +24,7 @@ void TimeDef::timedef(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
     cout << "" << endl;
     cout << "" << endl;
 
+
     cout << "**************************\t" << "**************************" << endl;
     cout << "*     12-Hour Clock      *\t" << "*     24-Hour Clock      *" << endl;
 
@@ -35,115 +36,147 @@ void TimeDef::timedef(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
 
     if ((minutes < 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << zero << seconds
-            << " " << ampm << "      *\t" << "*     " << zero << Twenty4Digits
+        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << zero <<
+            seconds << " " << ampm << "      *\t" << "*     " << zero << 
+          
+            Twenty4Digits
             << colon << zero << minutes << colon << zero << seconds << "           *" << endl;
     }
 
     else if ((minutes < 10) && (seconds >= 10) && (Twenty4Digits < 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << seconds << " "
-            << ampm << "      *\t" << "*     " << zero << Twenty4Digits << colon << zero << minutes
+        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << seconds 
+            << " " << ampm << "      *\t" << "*     " << zero << 
+
+            Twenty4Digits << colon << zero << minutes
             << colon << seconds << "           *" << endl;
     }
 
     else if ((minutes >= 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << zero << seconds << " "
-            << ampm << "      *\t" << "*     " << zero << Twenty4Digits << colon << minutes << colon
+        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << zero << seconds 
+            << " " << ampm << "      *\t" << "*     " << zero << 
+           
+            Twenty4Digits << colon << minutes << colon
             << zero << seconds << "           *" << endl;
     }
 
-    if ((minutes < 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits > 10)) 
+    if ((minutes < 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << zero << minutes << colon << zero << seconds
-            << " " << ampm << "      *\t" << "*     " << zero << Twenty4Digits
+            << " " << ampm << "      *\t" << "*     " << zero << 
+          
+            Twenty4Digits
             << colon << zero << minutes << colon << zero << seconds << "           *" << endl;
     }
 
-    else if ((minutes < 10) && (seconds >= 10) && (Twenty4Digits < 10) && (TwelveDigits > 10)) 
+    else if ((minutes < 10) && (seconds >= 10) && (Twenty4Digits < 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << zero << minutes << colon << seconds << " "
-            << ampm << "      *\t" << "*     " << zero << Twenty4Digits << colon << zero << minutes
+            << ampm << "      *\t" << "*     " << zero <<
+           
+            Twenty4Digits << colon << zero << minutes
             << colon << seconds << "           *" << endl;
     }
 
-    else if ((minutes >= 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits > 10)) 
+    else if ((minutes >= 10) && (seconds < 10) && (Twenty4Digits < 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << minutes << colon << zero << seconds << " "
-            << ampm << "      *\t" << "*     " << zero << Twenty4Digits << colon << minutes << colon
+            << ampm << "      *\t" << "*     " << zero <<
+          
+            Twenty4Digits << colon << minutes << colon
             << zero << seconds << "           *" << endl;
     }
 
     // case when 24 digits is single digit and 12 digits is double digits 
     else if ((minutes >= 10) && (seconds >= 10) && (Twenty4Digits < 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << seconds << " " << ampm    
-            << "      *\t" << "*     " << zero << Twenty4Digits << colon << minutes << colon << seconds
+        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << seconds << " " 
+            << ampm     << "      *\t" << "*     " << zero << 
+         
+            Twenty4Digits << colon << minutes << colon << seconds
             << "           *" << endl;
     }
 
     else if ((minutes >= 10) && (seconds < 10) && (Twenty4Digits >= 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << minutes << colon << zero << seconds << " "
-            << ampm << "      *\t" << "*     " << Twenty4Digits << colon << minutes
+            << ampm << "      *\t" << "*     " << 
+         
+            Twenty4Digits << colon << minutes
             << colon << zero << seconds << "           *" << endl;
     }
 
     else if ((minutes >= 10) && (seconds < 10) && (Twenty4Digits >= 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << zero << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << minutes << colon << zero << seconds
+        cout << "*     " << zero << TwelveDigits << colon << minutes << colon << zero << seconds << " "
+            << ampm  << "      *\t" << "*     " << 
+         
+            Twenty4Digits << colon << minutes << colon << zero << seconds
             << "           *" << endl;
     }
 
     else if ((minutes < 10) && (seconds < 10) && (Twenty4Digits >= 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << zero << minutes << colon << zero << seconds << " "
-            << ampm << "      *\t" << "*     " << Twenty4Digits << colon << zero << minutes << colon
+            << ampm << "      *\t" << "*     " << 
+         
+            Twenty4Digits << colon << zero << minutes << colon
             << zero << seconds << "           *" << endl;
     }
 
     else if ((minutes < 10) && (seconds < 10) && (Twenty4Digits >= 10) && (TwelveDigits < 10)) 
     {
         cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << zero << seconds << " "
-            << ampm << "      *\t" << "*     " << Twenty4Digits << colon << zero << minutes << colon
+            << ampm << "      *\t" << "*     " << 
+         
+            Twenty4Digits << colon << zero << minutes << colon
             << zero << seconds << "           *" << endl;
     }
 
     else if ((minutes >= 10) && (seconds >= 10) && (Twenty4Digits >= 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << minutes << colon << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << minutes << colon << seconds
+            << "      *\t" << "*     " << 
+          
+            Twenty4Digits << colon << minutes << colon << seconds
             << "           *" << endl;
     }
-
-    // case when 24h is 00 and 12h is 12
+     
+    // case when 24h is 00 and 12h is 12  fixed 1/12/23 no leading zero was printing before 24 digits
     else if ((minutes >= 10) && (seconds >= 10) && (Twenty4Digits < 10) && (TwelveDigits >= 10)) 
     {  
         cout << "*     " << TwelveDigits << colon << minutes << colon << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << minutes << colon << seconds
+            << "      *\t" << "*     " << zero << 
+        
+            Twenty4Digits << colon << minutes << colon << seconds
             << "           *" << endl;
     }
 
     else if ((minutes >= 10) && (seconds >= 10) && (Twenty4Digits >= 10) && (TwelveDigits < 10)) 
     {
         cout << "*     " << zero << TwelveDigits << colon << minutes << colon << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << minutes << colon << seconds
+            << "      *\t" << "*     " << 
+       
+            Twenty4Digits << colon << minutes << colon << seconds
             << "           *" << endl;
     }
 
     else if ((minutes < 10) && (seconds >= 10) && (Twenty4Digits >= 10) && (TwelveDigits < 10)) 
     {
-        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << zero << minutes << colon << seconds
+        cout << "*     " << zero << TwelveDigits << colon << zero << minutes << colon << seconds << " " 
+            << ampm   << "      *\t" << "*     " << 
+        
+            Twenty4Digits << colon << zero << minutes << colon << seconds
             << "           *" << endl;
     }
 
     else if ((minutes < 10) && (seconds >= 10) && (Twenty4Digits >= 10) && (TwelveDigits >= 10)) 
     {
         cout << "*     " << TwelveDigits << colon << zero << minutes << colon << seconds << " " << ampm
-            << "      *\t" << "*     " << Twenty4Digits << colon << zero << minutes << colon << seconds
+            << "      *\t" << "*     " << 
+        
+            Twenty4Digits << colon << zero << minutes << colon << seconds
             << "           *" << endl;
     }
 

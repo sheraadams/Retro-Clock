@@ -28,9 +28,9 @@ void Clock::addHour(int& TwelveDigits, int& Twenty4Digits, string& ampm)
         TwelveDigits = 1;
     }
 
-    if (Twenty4Digits == 24) 
+    if (Twenty4Digits == 23) 
     {
-        Twenty4Digits = 00;
+        Twenty4Digits = 0;
     }
 }
 
@@ -39,27 +39,28 @@ void Clock::addMinute(int& minutes, int& TwelveDigits, int& Twenty4Digits, strin
 {
     minutes += 1;
 
-    if ((minutes == 60) && (TwelveDigits != 12)) 
+
+    if (minutes >= 59)
     {
         minutes = 0;
         Twenty4Digits += 1;
         TwelveDigits += 1;
     }
 
-    if (minutes == 59 && TwelveDigits == 12) 
+    if (TwelveDigits >= 12)
     {
         minutes = 0;
         TwelveDigits = 1;
+    }
 
-        if (Twenty4Digits == 12) 
-        {
-            Twenty4Digits = 13;
-        }
+    if (Twenty4Digits == 12)
+    {
+        Twenty4Digits = 13;
+    }
 
-        if (Twenty4Digits == 24) 
-        {
-            Twenty4Digits = 00;
-        }
+    if (Twenty4Digits == 23)
+    {
+        Twenty4Digits = 0;
     }
 }
 
@@ -70,7 +71,7 @@ void Clock::addSecond(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
 
     seconds += 1;
 
-    if ((seconds == 60) && (minutes == 59)) 
+    if ((seconds >= 59) && (minutes >= 59)) 
     {
         minutes = 0;
         seconds = 0;
@@ -78,18 +79,18 @@ void Clock::addSecond(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
         Twenty4Digits = Twenty4Digits + 1;
         TwelveDigits = TwelveDigits + 1;
 
-        if (Twenty4Digits == 24) 
+        if (Twenty4Digits >= 23) 
         {
-            Twenty4Digits = 00;
+            Twenty4Digits = 0;
         }
 
-        if (Twenty4Digits == 12) 
+        if (TwelveDigits >= 12)
         {
-            Twenty4Digits = 1;
+            TwelveDigits = 1;
         }
 
     }
-    if (seconds == 60)
+    if (seconds >= 59)
     {
         minutes += 1;
         seconds = 0;
@@ -99,7 +100,7 @@ void Clock::addSecond(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
 //Am pm function defined for calling after a user-requested time change to verify that the time is in the correct ampm format
 void Clock::addAmpm(int& seconds, int& minutes, int& TwelveDigits, int& Twenty4Digits, string& ampm) 
 {
-    if (Twenty4Digits == 12) 
+    if (Twenty4Digits >= 12) 
     {
         ampm = "P.M.";
     }
@@ -119,6 +120,7 @@ void Clock::pMenu()
     cout << "*                   [2] Add One Minute                   *" << endl;
     cout << "*                   [3] Add One Second                   *" << endl;
     cout << "*                   [4] Exit Application                 *" << endl;
+    cout << "*                   [5] Set A Time                       *" << endl;
     cout << "**********************************************************" << endl;
 
     cout << "" << endl;
