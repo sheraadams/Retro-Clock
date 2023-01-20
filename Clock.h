@@ -1,5 +1,5 @@
-#ifndef CHADATECHCLOCK_CLOCK_H
-#define CHADATECHCLOCK_CLOCK_H
+#ifndef CLOCK_PROJECT_REWORKED_CLOCK_H
+#define CLOCK_PROJECT_REWORKED_CLOCK_H
 
 #include <string>
 
@@ -9,20 +9,17 @@ class Clock {
 
 public:
 
-    void addHour(int& TwelveDigits, int& Twenty4Digits, string& ampm);
+    void addHour(int& twentyFour, int& twelve, string& ampm);
 
-    void addMinute(int& minutes, int& TwelveDigits, int& Twenty4Digits, string& ampm);
+    void addMinute(int& twentyFour, int& twelve, int& minutes, string& ampm);
 
-    void addSecond(int& seconds, int& minutes, int& TwelveDigits,
-        int& Twenty4Digits, string& ampm);
+    void addSecond(int& twentyFour, int& twelve, int& minutes, int& seconds, string& ampm);
 
-    void pMenu();
+    void menu();
 
-
-    void addAmpm(int& seconds, int& minutes, int& TwelveDigits,
-        int& Twenty4Digits, string& ampm);
+    void addAmpm(int& twentyFour, int& twelve, int& minutes, int& seconds, string& ampm);
 
 };
 
 
-#endif //CHADATECHCLOCK_CLOCK_H
+#endif 

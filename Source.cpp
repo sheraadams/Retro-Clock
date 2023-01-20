@@ -13,12 +13,12 @@ Chada Tech Clock
 
 using namespace std;
 
-int main() 
+int main()
 {
     system("color 0A");
 
-    Driver driverObject;
-    driverObject.driver();
+    Driver driver;
+    driver.driver();
 
     return 0;
 }

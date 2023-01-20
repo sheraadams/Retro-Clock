@@ -4,7 +4,7 @@ Southern New Hampshire University
 Chada Tech Clock
 
 Clock class is used to store several functions called frequently in changing the time.
-Add hour, add minute, add second, print menu, and addAmpm functions are defined. 
+Add hour, add minute, add second, print menu, and addAmpm functions are defined.
 ****************************************************************************************************/
 
 #include "Clock.h"
@@ -18,78 +18,72 @@ using namespace std;
 
 // AddHour function can be called to add an hour to the clock
 // time parameters are passed by reference 
-void Clock::addHour(int& TwelveDigits, int& Twenty4Digits, string& ampm)
+void Clock::addHour(int& twentyFour, int& twelve, string& ampm)
 {
-    TwelveDigits += 1;
-    Twenty4Digits += 1;
+    twelve += 1;
+    twentyFour += 1;
 
-    if (TwelveDigits == 13) 
+    if (twelve == 13)
     {
-        TwelveDigits = 1;
+        twelve = 1;
     }
 
-    if (Twenty4Digits == 23) 
+    if (twentyFour == 24)
     {
-        Twenty4Digits = 0;
+        twentyFour = 00;
     }
 }
 
 //add minute function can be called to add minutes to the clock
-void Clock::addMinute(int& minutes, int& TwelveDigits, int& Twenty4Digits, string& ampm)
+void Clock::addMinute(int& twentyFour, int& twelve, int& minutes, string& ampm)
 {
     minutes += 1;
 
-
-    if (minutes >= 59)
+    if (minutes >= 59 && twelve < 12)
     {
         minutes = 0;
-        Twenty4Digits += 1;
-        TwelveDigits += 1;
+        twentyFour += 1;
+        twelve += 1;
     }
 
-    if (TwelveDigits >= 12)
+    if (minutes >= 59 && twelve >= 12)
     {
         minutes = 0;
-        TwelveDigits = 1;
-    }
-
-    if (Twenty4Digits == 12)
-    {
-        Twenty4Digits = 13;
-    }
-
-    if (Twenty4Digits == 23)
-    {
-        Twenty4Digits = 0;
+        twelve = 1;
+        if (twentyFour < 23)
+        {
+            twentyFour +=1;
+        }
+        if (twentyFour > 23)
+        {
+            twentyFour = 00;
+        }
     }
 }
 
-
 //add second function adds second to the clock
-void Clock::addSecond(int& seconds, int& minutes, int& TwelveDigits, int& Twenty4Digits, string& ampm) 
+void Clock::addSecond(int& twentyFour, int& twelve, int& minutes, int& seconds, string& ampm)
 {
 
     seconds += 1;
 
-    if ((seconds >= 59) && (minutes >= 59)) 
+    if ((seconds >= 59) && (minutes >= 59))
     {
         minutes = 0;
         seconds = 0;
+        twentyFour = twentyFour + 1;
+        twelve = twelve + 1;
 
-        Twenty4Digits = Twenty4Digits + 1;
-        TwelveDigits = TwelveDigits + 1;
-
-        if (Twenty4Digits >= 23) 
+        if (twentyFour > 23)
         {
-            Twenty4Digits = 0;
+            twentyFour = 00;
         }
-
-        if (TwelveDigits >= 12)
+        if (twelve > 12)
         {
-            TwelveDigits = 1;
+            twelve = 1;
         }
-
     }
+
     if (seconds >= 59)
     {
         minutes += 1;
@@ -98,21 +92,21 @@ void Clock::addSecond(int& seconds, int& minutes, int& TwelveDigits, int& Twenty
 }
 
 //Am pm function defined for calling after a user-requested time change to verify that the time is in the correct ampm format
-void Clock::addAmpm(int& seconds, int& minutes, int& TwelveDigits, int& Twenty4Digits, string& ampm) 
+void Clock::addAmpm(int& twentyFour, int& twelve,  int& minutes, int& seconds, string& ampm)
 {
-    if (Twenty4Digits >= 12) 
+    if (twentyFour == 12)
     {
         ampm = "P.M.";
     }
 
-    if (Twenty4Digits == 00)
+    if (twentyFour == 00)
     {
         ampm = "A.M.";
     }
 }
 
 // print menu function
-void Clock::pMenu()
+void Clock::menu()
 {
 
     cout << "**********************************************************" << endl;

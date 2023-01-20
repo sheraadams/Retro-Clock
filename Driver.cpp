@@ -3,90 +3,70 @@ Shera Adams
 Southern New Hampshire University
 Chada Tech Clock
 
-The driver class runs on a while loop that executes the main menu on a switch where case 1 is add 
-hours, case 2 is add minutes, case 3 is add seconds and case 4 is exit the application. 
+The driver class runs on a while loop that executes the main menu on a switch where case 1 is add
+hours, case 2 is add minutes, case 3 is add seconds and case 4 is exit the application.
 ****************************************************************************************************/
 
 #include "Driver.h"
-#include "Driver.h"
+#include "Time.h"
 #include "Clock.h"
-#include "TimeDef.h"
+#include "Permutations.h"
 #include <iostream>
 #include <iomanip>
 // to use current time, disable warning 4996
-#pragma warning(disable : 4996).
+#pragma warning(disable : 4996)
 using namespace std;
 
 // function objects
-Clock hourObject;
-Clock addSecObject;
-Clock addMinObject;
-Clock ampmObject;
-Clock PMenuObject;
-TimeDef timedefObject;
+Clock clockFunctions;
+Driver driver;
+Permutations permutations;
 
 void Driver::driver()
 {
-
-    
     // initialize variables
-    bool acceptingInput = true; 
+    bool acceptingInput = true;
     int userInput;
     int zero = 0;
     char colon = ':';
     string ampm = "A.M.";
-   
+
     // get current time 
     time_t now = time(0);
     tm* ltm = localtime(&now);
 
     // assign the current time to variables
-    int TwelveDigits = ltm->tm_hour;  
-    int Twenty4Digits = ltm->tm_hour;
+    int twelve = ltm->tm_hour;
+    int twentyFour = ltm->tm_hour;
     int minutes = ltm->tm_min;
     int seconds = ltm->tm_sec;
 
+    // determine how to save the variables in 12 and 24 hour format
+    if (ltm->tm_hour > 12){ twelve = ltm->tm_hour - 12;}
+    else{   twelve = ltm->tm_hour;}
+    if (ltm->tm_hour > 12){ twelve = ltm->tm_hour - 12;}
+    else{   twelve = ltm->tm_hour;}
+    if (twentyFour >= 12){  ampm = "P.M.";}
+    else{   ampm = "A.M.";}
 
-    if (ltm->tm_hour > 12) 
+    // update the time
+    Time Time(twentyFour, twelve, minutes, seconds, ampm);
+
+    do
     {
-        TwelveDigits = ltm->tm_hour - 12;
-    }
-    else 
-    {
-        TwelveDigits = ltm->tm_hour;
-    }
-    if (ltm->tm_hour > 12) 
-    {
-        TwelveDigits = ltm->tm_hour - 12;
-    }
-    else 
-    {
-        TwelveDigits = ltm->tm_hour;
-    }
-    if (Twenty4Digits >= 12) 
-    {
-        ampm = "P.M.";
-    }
-    else
-    {
-        ampm = "A.M.";
-    }
-    do 
-    {
-        try 
+        try
         {
-
             //print the time
-            timedefObject.timedef(seconds, minutes, TwelveDigits, Twenty4Digits, ampm);
-          
-            PMenuObject.pMenu();
-         
+            permutations.permutations(twentyFour, twelve, minutes, seconds, ampm);
+
+            clockFunctions.menu();
+
             std::cin >> userInput;
-        
-            cout << endl; 
-       
+
+            cout << endl;
+
             // exception handling and throw invalid input
-            while (std::cin.fail()) 
+            while (std::cin.fail())
             {
                 std::cin.clear();
                 std::cin.ignore(400, '\n');
@@ -95,39 +75,36 @@ void Driver::driver()
 
                 continue;
             }
-            if ((userInput > 5) || (userInput <= 0))
-            {
-                throw (userInput);
-            }
+            if ((userInput > 5) || (userInput <= 0)){   throw (userInput);}
         }
         catch (...) {}
 
-        switch (userInput) 
-        { 
-       // user can add hour manually
+        switch (userInput)
+        {
+            // user can add hour manually
         case 1:
 
-            hourObject.addHour(TwelveDigits, Twenty4Digits, ampm);
+            clockFunctions.addHour(twentyFour, twelve, ampm);
 
-            ampmObject.addAmpm(seconds, minutes, TwelveDigits, Twenty4Digits, ampm);
+            clockFunctions.addAmpm(twentyFour, twelve, minutes, seconds, ampm);
             break;
 
-        // user can add minute manually 
+            // user can add minute manually 
         case 2:
 
-            addMinObject.addMinute(minutes, TwelveDigits, Twenty4Digits, ampm);
+            clockFunctions.addMinute(twentyFour, twelve, minutes, ampm);
 
-            ampmObject.addAmpm(seconds, minutes, TwelveDigits, Twenty4Digits, ampm);
-           
+            clockFunctions.addAmpm(twentyFour, twelve, minutes, seconds, ampm);
+
             break;
 
-        // user can add second manually 
+            // user can add second manually 
         case 3:
 
 
-            addSecObject.addSecond(seconds, minutes, TwelveDigits, Twenty4Digits, ampm);
+            clockFunctions.addSecond(twentyFour, twelve, minutes, seconds, ampm);
 
-            ampmObject.addAmpm(seconds, minutes, TwelveDigits, Twenty4Digits, ampm);
+            clockFunctions.addAmpm(twentyFour, twelve, minutes, seconds, ampm);
 
             break;
         case 4:
@@ -137,9 +114,13 @@ void Driver::driver()
             cout << "**********************************************************" << endl;
 
             return;
-        
-        
-        case 5: 
+
+
+        case 5:
+
+            // only real times may be entered to jump to that time. Example 12:59:59 AM is not supported as this time does not exist
+
+            std::cout << "*** Enter a time to jump (time must be a real 12 hour time) ***: " << endl;
             std::cout << "Enter Hours (12 hour time): " << endl;
             int userHours;
             try
@@ -154,12 +135,12 @@ void Driver::driver()
                     std::cin.ignore(400, '\n');
 
                     cout << "Invalid Choice. Please choose a valid menu option." << endl;
-                    PMenuObject.pMenu();
+                    clockFunctions.menu();
                     continue;
                 }
             }
             catch (...) {}
-            TwelveDigits = userHours;
+            twelve = userHours;
 
 
             std::cout << "Enter Minutes: " << endl;
@@ -176,7 +157,7 @@ void Driver::driver()
                     std::cin.ignore(400, '\n');
 
                     cout << "Invalid Choice. Please choose a valid menu option." << endl;
-                    PMenuObject.pMenu();
+                    clockFunctions.menu();
                     continue;
                 }
             }
@@ -187,7 +168,6 @@ void Driver::driver()
             int userSeconds;
             try
             {
-
                 std::cin >> userSeconds;
                 cout << endl;
 
@@ -198,7 +178,7 @@ void Driver::driver()
                     std::cin.ignore(400, '\n');
 
                     cout << "Invalid Choice. Please choose a valid menu option." << endl;
-                    PMenuObject.pMenu();
+                    clockFunctions.menu();
                     continue;
                 }
             }
@@ -220,7 +200,7 @@ void Driver::driver()
                     std::cin.ignore(400, '\n');
 
                     cout << "Invalid Choice. Please choose a valid menu option." << endl;
-                    PMenuObject.pMenu();
+                    clockFunctions.menu();
                     continue;
                 }
             }
@@ -231,40 +211,40 @@ void Driver::driver()
                 ampm = "P.M.";
 
             // define 24 hour time
-            if ((TwelveDigits == 12) && (ampm == "A.M.")) 
-            { 
-                Twenty4Digits = 0; 
+            if ((twelve == 12) && (ampm == "A.M."))
+            {
+                twentyFour = 0;
             }
-            if ((TwelveDigits == 1) && (ampm == "A.M.")) { Twenty4Digits = 1; }
-            if ((TwelveDigits == 2) && (ampm == "A.M.")) { Twenty4Digits = 2; }
-            if ((TwelveDigits == 3) && (ampm == "A.M.")) { Twenty4Digits = 3; }
-            if ((TwelveDigits == 4) && (ampm == "A.M.")) { Twenty4Digits = 4; }
-            if ((TwelveDigits == 5) && (ampm == "A.M.")) { Twenty4Digits = 5; }
-            if ((TwelveDigits == 6) && (ampm == "A.M.")) { Twenty4Digits = 6; }
-            if ((TwelveDigits == 7) && (ampm == "A.M.")) { Twenty4Digits = 7; }
-            if ((TwelveDigits == 8) && (ampm == "A.M.")) { Twenty4Digits = 8; }
-            if ((TwelveDigits == 9) && (ampm == "A.M.")) { Twenty4Digits = 9; }
-            if ((TwelveDigits == 10) && (ampm == "A.M.")) { Twenty4Digits = 10; }
-            if ((TwelveDigits == 11) && (ampm == "A.M.")) { Twenty4Digits = 11; }
-            if ((TwelveDigits == 12) && (ampm == "P.M.")) { Twenty4Digits = 12; }
-            if ((TwelveDigits == 1) && (ampm == "P.M.")) { Twenty4Digits = 13; }
-            if ((TwelveDigits == 2) && (ampm == "P.M.")) { Twenty4Digits = 14; }
-            if ((TwelveDigits == 3) && (ampm == "P.M.")) { Twenty4Digits = 15; }
-            if ((TwelveDigits == 4) && (ampm == "P.M.")) { Twenty4Digits = 16; }
-            if ((TwelveDigits == 5) && (ampm == "P.M.")) { Twenty4Digits = 17; }
-            if ((TwelveDigits == 6) && (ampm == "P.M.")) { Twenty4Digits = 18; }
-            if ((TwelveDigits == 7) && (ampm == "P.M.")) { Twenty4Digits = 19; }
-            if ((TwelveDigits == 8) && (ampm == "P.M.")) { Twenty4Digits = 20; }
-            if ((TwelveDigits == 9) && (ampm == "P.M.")) { Twenty4Digits = 21; }
-            if ((TwelveDigits == 10) && (ampm == "P.M.")) { Twenty4Digits = 22; }
-            if ((TwelveDigits == 11) && (ampm == "P.M.")) { Twenty4Digits = 23; }
+
+            if ((twelve == 1) && (ampm == "A.M.")) { twentyFour = 1; }
+            if ((twelve == 2) && (ampm == "A.M.")) { twentyFour = 2; }
+            if ((twelve == 3) && (ampm == "A.M.")) { twentyFour = 3; }
+            if ((twelve == 4) && (ampm == "A.M.")) { twentyFour = 4; }
+            if ((twelve == 5) && (ampm == "A.M.")) { twentyFour = 5; }
+            if ((twelve == 6) && (ampm == "A.M.")) { twentyFour = 6; }
+            if ((twelve == 7) && (ampm == "A.M.")) { twentyFour = 7; }
+            if ((twelve == 8) && (ampm == "A.M.")) { twentyFour = 8; }
+            if ((twelve == 9) && (ampm == "A.M.")) { twentyFour = 9; }
+            if ((twelve == 10) && (ampm == "A.M.")) { twentyFour = 10; }
+            if ((twelve == 11) && (ampm == "A.M.")) { twentyFour = 11; }
+            if ((twelve == 12) && (ampm == "P.M.")) { twentyFour = 12; }
+            if ((twelve == 1) && (ampm == "P.M.")) { twentyFour = 13; }
+            if ((twelve == 2) && (ampm == "P.M.")) { twentyFour = 14; }
+            if ((twelve == 3) && (ampm == "P.M.")) { twentyFour = 15; }
+            if ((twelve == 4) && (ampm == "P.M.")) { twentyFour = 16; }
+            if ((twelve == 5) && (ampm == "P.M.")) { twentyFour = 17; }
+            if ((twelve == 6) && (ampm == "P.M.")) { twentyFour = 18; }
+            if ((twelve == 7) && (ampm == "P.M.")) { twentyFour = 19; }
+            if ((twelve == 8) && (ampm == "P.M.")) { twentyFour = 20; }
+            if ((twelve == 9) && (ampm == "P.M.")) { twentyFour = 21; }
+            if ((twelve == 10) && (ampm == "P.M.")) { twentyFour = 22; }
+            if ((twelve == 11) && (ampm == "P.M.")) { twentyFour = 23; }
+            if ((twelve == 12) && (ampm == "A.M.")) { twentyFour = 0; }
 
             break;
-        
-
 
         default:
-         
+
             break;
         }
 
