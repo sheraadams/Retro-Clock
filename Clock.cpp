@@ -24,14 +24,12 @@ void Clock::addHour(int& twentyFour, int& twelve, string& ampm)
     twentyFour += 1;
 
     if (twelve == 13)
-    {
         twelve = 1;
-    }
+    
 
-    if (twentyFour == 24)
-    {
+    if (twentyFour > 23)
         twentyFour = 00;
-    }
+    
 }
 
 //add minute function can be called to add minutes to the clock
@@ -43,6 +41,8 @@ void Clock::addMinute(int& twentyFour, int& twelve, int& minutes, string& ampm)
     {
         minutes = 0;
         twentyFour += 1;
+        if (twentyFour > 23)
+            twentyFour = 0;
         twelve += 1;
     }
 
@@ -51,13 +51,11 @@ void Clock::addMinute(int& twentyFour, int& twelve, int& minutes, string& ampm)
         minutes = 0;
         twelve = 1;
         if (twentyFour < 23)
-        {
             twentyFour +=1;
-        }
+        
         if (twentyFour > 23)
-        {
-            twentyFour = 00;
-        }
+            twentyFour = 0;
+        
     }
 }
 
@@ -75,13 +73,11 @@ void Clock::addSecond(int& twentyFour, int& twelve, int& minutes, int& seconds, 
         twelve = twelve + 1;
 
         if (twentyFour > 23)
-        {
-            twentyFour = 00;
-        }
+            twentyFour = 0;
+        
         if (twelve > 12)
-        {
             twelve = 1;
-        }
+        
     }
 
     if (seconds >= 59)
@@ -95,14 +91,12 @@ void Clock::addSecond(int& twentyFour, int& twelve, int& minutes, int& seconds, 
 void Clock::addAmpm(int& twentyFour, int& twelve,  int& minutes, int& seconds, string& ampm)
 {
     if (twentyFour == 12)
-    {
         ampm = "P.M.";
-    }
+    
 
     if (twentyFour == 00)
-    {
         ampm = "A.M.";
-    }
+    
 }
 
 // print menu function

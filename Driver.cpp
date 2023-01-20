@@ -49,13 +49,13 @@ void Driver::driver()
     if (twentyFour >= 12){  ampm = "P.M.";}
     else{   ampm = "A.M.";}
 
-    // update the time
-    Time Time(twentyFour, twelve, minutes, seconds, ampm);
+
 
     do
     {
         try
-        {
+        {    // update the time
+            Time Time(twentyFour, twelve, minutes, seconds, ampm);
             //print the time
             permutations.permutations(twentyFour, twelve, minutes, seconds, ampm);
 
