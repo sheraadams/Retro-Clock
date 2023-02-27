@@ -1,5 +1,5 @@
-#ifndef CLOCK_PROJECT_REWORKED_CLOCK_H
-#define CLOCK_PROJECT_REWORKED_CLOCK_H
+#ifndef CLOCK_H
+#define CLOCK_H
 
 #include <string>
 
