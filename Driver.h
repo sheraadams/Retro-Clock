@@ -1,5 +1,5 @@
-#ifndef CLOCK_PROJECT_REWORKED_DRIVER_H
-#define CLOCK_PROJECT_REWORKED_DRIVER_H
+#ifndef DRIVER_H
+#define DRIVER_H
 
 using namespace std;
 
