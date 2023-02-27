@@ -1,11 +1,8 @@
 # Documentation
-This program was written in C++ for CS 210 Programming Languages. The assignment was to create a digital clock that supports user-directed time change in hours, minutes, and seconds. The clock updates once in real time and then allows for adjustment as necessary. As part of the required functionality, the clock displays in double digit hours, minutes, and seconds in a 12-hour format as well as a 24-hour format simultaneously. The user menu allows the user to add time or exit.
+This program was written in C++ for a school project. The assignment was to create a digital clock that supports user-directed time change in hours, minutes, and seconds. The clock updates once in real time and then allows for adjustment as necessary. As part of the required functionality, the clock displays in double digit hours, minutes, and seconds in a 12-hour format as well as a 24-hour format simultaneously. The user menu allows the user to add time or exit.
 
 ## Classes 
-The program includes a main class as well as Clock, Driver, and Permutations classes to keep main compact and clean and more maintainable. Clock.cpp contains definitions for time change including functions addHour, addMinute, addSecond and addampm. Permutations.cpp determines if leading zero output is needed. Driver.cpp loops through main menu of the program and operates on a switch statement that allows the user to add time, set a time, or exit the application.
-
-## License
-All code in this repository is licensed under a [APACHE LICENSE, VERSION 2.0](LICENSE-CODE).
+The program includes Source, Clock, Driver, and Permutations classes. Clock.cpp contains definitions for time change including functions addHour, addMinute, addSecond and addampm. Permutations.cpp determines if leading zero output is needed. Driver.cpp loops through main menu of the program and operates on a switch statement that allows the user to add time, set a time, or exit the application.
 
 ## The Application
 <p align="center">
