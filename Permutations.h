@@ -1,5 +1,5 @@
-#ifndef CLOCK_PROJECT_REWORKED_PERMUTATIONS_H
-#define CLOCK_PROJECT_REWORKED_PERMUTATIONS_H
+#ifndef PERMUTATIONS_H
+#define PERMUTATIONS_H
 #include <string>
 using namespace std;
 
